@@ -1,0 +1,17 @@
+{  
+    ".dhtml": "text/html",
+    ".dir": "application/x-director",
+    ".htm": "text/html",
+    ".html": "text/html",
+    ".jad": "text/vnd.sun.j2me.app-descriptor",
+    ".jam": "application/x-jam",
+    ".jar": "application/java-archive",
+    ".java": "text/plain",
+    ".jfif": "image/pipeg",
+    ".jnlp": "application/x-java-jnlp-file",
+    ".jpe": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".jpg": "image/jpeg",
+    ".jpz": "image/jpeg",
+    ".png": "image/png"
+}
