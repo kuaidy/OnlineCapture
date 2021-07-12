@@ -37,17 +37,27 @@
             width: 650px;
             box-shadow: 0px 0px 10px 0px #ccc;
         }
-    </style>    
+        #loading{
+            height: 4px;
+            position: fixed;
+            top: 0;
+            z-index: 9999;
+            background:#FB7299;
+            box-shadow:#FB7299 1px 0 6px 1px;
+        }
+    </style>
+    <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
-    <div id="logo" ">在线截图</div>
+    <div id="loading"></div>
+    <div id="logo">在线截图</div>
     <form action="" id="FormId">
         <input type="text" name="url" id="UrlId">
         <input type="text" name="filename" id="FileId" hidden="true">
         <input type="button" value="创建" onclick="btn_create();" id="BtnId">
     </form>
     <div id="resultimg">
-        <img src="{{ImageUrl}}" alt="" id="ImageId">
+        <img src="" alt="" id="ImageId">
     </div>
 </body>
 <script>
@@ -59,15 +69,43 @@
         InputFile.value="";
     }
     function btn_create(){
+        $('#loading').fadeIn();
+        $('#loading').animate({'width':'40%'},50);
         var FormObj=document.getElementById("FormId");
         var InputUrl=document.getElementById("UrlId");
         var InputFile=document.getElementById("FileId");
         var ImgObj=document.getElementById("ImageId");
         if(InputUrl.value!=""){
-            var dateinfo=new Date().Format("yyyyMMddhhmmss");
-            InputFile.value=dateinfo+".jpg";
-            FormObj.submit();
+            // var dateinfo=new Date().Format("yyyyMMddhhmmss");
+            // InputFile.value=dateinfo+".jpg";
+            // FormObj.submit();
+
+            var url="http://www.rdonly.com:8081/";
+
+            var xhr=new XMLHttpRequest();
+
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    var status=xhr.status;
+
+                    if(status>=200&&status<300){
+                        ImgObj.src=xhr.responseText;
+                        
+                    }else{
+                        console.log(error);
+                    }
+
+                    $('#loading').animate({'width':'100%'},50);
+                    $('#loading').fadeOut();
+                    $('#loading').animate({'width':'0%'},50);
+                }
+            }
+
+            xhr.open('GET',url+"?url="+InputUrl.value,true);
+
+            xhr.send();
         }
+       
     }
 
     //日期时间格式化

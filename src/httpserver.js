@@ -39,7 +39,7 @@ http.createServer(function(req,res) {
                     }
                     res.writeHead(200,{'Content-Type':ContentType});
                     if(link!=""&&link!=undefined){
-                        res.write(data.toString().replace("{{ImageUrl}}","http://www.rdonly.com:8081/"+filename));
+                        res.write(data.toString().replace("{{ImageUrl}}","p"+filename));
                     }else{
                         res.write(data);
                     }
